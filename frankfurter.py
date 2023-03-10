@@ -24,11 +24,14 @@ class FrankFurter:
         uri = "latest"
         if frm != "EUR":
             uri += f"?from={frm}"
+        else:
+            uri += "?from=eur"
         if type(to) is list:
             uri += f"&to={','.join(to)}"
+        elif to == '':
+            None
         else:
             uri += f"&to={to}"
-        # print(uri)
         return self.__request(uri)
 
     def convert(
@@ -41,11 +44,10 @@ class FrankFurter:
         uri += f"?amount={amount}"
         uri += f"&from={frm}"
         uri += f"&to={to}"
-        # print(uri)
+        # pprint(uri)
         return self.__request(uri)
 
     def currencies(
             self
     ):
         return self.__request('currencies')
-
